@@ -1,6 +1,6 @@
 import { useFonts } from "expo-font";
 import React, { useEffect } from "react";
-import { View } from "react-native";
+import { StatusBar, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import Routes from "./screens/Routes";
 
@@ -20,5 +20,10 @@ export default function App() {
   if (!isFontLoaded) {
     return null;
   }
-  return <Routes />;
+  return (
+    <>
+      <StatusBar barStyle="light-content" />
+      <Routes />
+    </>
+  );
 }
