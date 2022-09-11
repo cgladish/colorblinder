@@ -1,15 +1,24 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./screens/Home";
+import { useFonts } from "expo-font";
+import React, { useEffect } from "react";
+import { View } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+import Routes from "./screens/Routes";
 
-const Stack = createNativeStackNavigator();
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  const [isFontLoaded] = useFonts({
+    dogbyte: require("./assets/fonts/dogbyte.otf"),
+  });
+
+  useEffect(() => {
+    if (isFontLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [isFontLoaded]);
+
+  if (!isFontLoaded) {
+    return null;
+  }
+  return <Routes />;
 }
